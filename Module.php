@@ -1,31 +1,37 @@
 <?php
+namespace XMLImport1;
+
 use Omeka\Module\AbstractModule;
-use Zend\View\Model\ViewModel;
-use Zend\Mvc\Controller\AbstractController;
+use Omeka\Entity\Job;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Module extends AbstractModule
 {
-    /** Module body **/
-
-    /**
-     * Get this module's configuration form.
-     *
-     * @param ViewModel $view
-     * @return string
-     */
-    public function getConfigForm(ViewModel $view)
+    public function getConfig()
     {
-        return '<input name="foo">';
+        return include __DIR__ . '/config/module.config.php';
     }
 
-    /**
-     * Handle this module's configuration form.
-     *
-     * @param AbstractController $controller
-     * @return bool False if there was an error during handling
-     */
-    public function handleConfigForm(AbstractController $controller)
+    public function install(ServiceLocatorInterface $serviceLocator)
     {
-        return true;
+        $connection = $serviceLocator->get('Omeka\Connection');
+        $sql = "
+            CREATE TABLE xmlimport1_import (id INT AUTO_INCREMENT NOT NULL, job_id INT NOT NULL, undo_job_id INT DEFAULT NULL, added_count INT NOT NULL, comment VARCHAR(255) DEFAULT NULL, resource_type VARCHAR(255) NOT NULL, has_err TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_17B50881BE04EA9 (job_id), UNIQUE INDEX UNIQ_17B508814C276F75 (undo_job_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB;
+            CREATE TABLE xmlimport1_entity (id INT AUTO_INCREMENT NOT NULL, job_id INT NOT NULL, entity_id INT NOT NULL, resource_type VARCHAR(255) NOT NULL, INDEX IDX_84D382F4BE04EA9 (job_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB;
+            ALTER TABLE xmlimport1_import ADD CONSTRAINT FK_17B50881BE04EA9 FOREIGN KEY (job_id) REFERENCES job (id);
+            ALTER TABLE xmlimport1_import ADD CONSTRAINT FK_17B508814C276F75 FOREIGN KEY (undo_job_id) REFERENCES job (id);
+            ALTER TABLE xmlimport1 Omeka S_entity ADD CONSTRAINT FK_84D382F4BE04EA9 FOREIGN KEY (job_id) REFERENCES job (id);
+        ";
+        $connection->exec($sql);
+    }
+
+    public function uninstall(ServiceLocatorInterface $serviceLocator)
+    {
+        $connection = $serviceLocator->get('Omeka\Connection');
+        $connection->exec("ALTER TABLE xmlimport1_entity DROP FOREIGN KEY FK_84D382F4BE04EA9;");
+        $connection->exec("ALTER TABLE xmlimport1_import DROP FOREIGN KEY FK_17B50881BE04EA9;");
+        $connection->exec("ALTER TABLE xmlimport1_import DROP FOREIGN KEY FK_17B508814C276F75;");
+        $connection->exec("DROP TABLE xmlimport1_entity;");
+        $connection->exec("DROP TABLE xmlimport1_import;");
     }
 }
