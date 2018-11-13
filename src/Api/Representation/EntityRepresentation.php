@@ -16,7 +16,7 @@ class EntityRepresentation extends AbstractEntityRepresentation
 
     public function getJsonLdType()
     {
-        return 'o:CsvimportEntity';
+        return 'o:XmlimportEntity';
     }
 
     public function job()

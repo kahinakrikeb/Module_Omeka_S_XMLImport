@@ -2,7 +2,7 @@
 namespace XMLImport1\Job;
 
 use Omeka\Job\AbstractJob;
-use CSVImport\XmlFile;
+use XMLImport\XmlFile;
 
 class Import extends AbstractJob
 {
@@ -27,10 +27,10 @@ class Import extends AbstractJob
         foreach ($mappingClasses as $mappingClass) {
             $mappings[] = new $mappingClass($args, $this->getServiceLocator());
         }
-        $csvFile = new XmlFile($this->getServiceLocator());
-        $csvFile->setTempPath($this->getArg('xmlpath'));
-        $csvFile->loadFromTempPath();
-        $csvImportJson = [
+        $xmlFile = new XmlFile($this->getServiceLocator());
+        $xmlFile->setTempPath($this->getArg('xmlpath'));
+        $xmlFile->loadFromTempPath();
+        $xmlImportJson = [
                             'o:job' => ['o:id' => $this->job->getId()],
                             'comment' => 'Job started',
                             'resource_type' => $resourceType,
@@ -38,10 +38,10 @@ class Import extends AbstractJob
                             'has_err' => false,
                           ];
 
-        $response = $this->api->create('xmlimport1_imports', $csvImportJson);
+        $response = $this->api->create('xmlimport1_imports', $xmlImportJson);
         $importRecordId = $response->getContent()->id();
         $insertJson = [];
-        foreach ($csvFile->fileObject as $index => $row) {
+        foreach ($xmlFile->fileObject as $index => $row) {
             //skip the first (header) row, and any blank ones
             if ($index == 0 || empty($row)) {
                 continue;
@@ -68,13 +68,13 @@ class Import extends AbstractJob
 
         $comment = $this->getArg('comment');
 
-        $csvImportJson = [
+        $xmlImportJson = [
                             'comment' => $comment,
                             'added_count' => $this->addedCount,
                             'has_err' => $this->hasErr,
                           ];
-        $response = $this->api->update('xmlimport1_imports', $importRecordId, $csvImportJson);
-        $csvFile->delete();
+        $response = $this->api->update('xmlimport1_imports', $importRecordId, $xmlImportJson);
+        $xmlFile->delete();
     }
 
     protected function createEntities($toCreate)

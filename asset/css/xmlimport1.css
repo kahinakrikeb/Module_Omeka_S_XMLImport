@@ -1,4 +1,4 @@
-.csv-import-fieldset-label {
+.xml-import-fieldset-label {
     display: block;
     border-color: rgba(0, 0, 0, 0.08);
     border-bottom-width: 0.1875em;
@@ -8,8 +8,8 @@
     font-size: 125%;
 }
 
-.csv-import-fieldset-label .collapse,
-.csv-import-fieldset-label .expand {
+.xml-import-fieldset-label .collapse,
+.xml-import-fieldset-label .expand {
     display: block;
     float: right;
 }

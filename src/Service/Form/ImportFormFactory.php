@@ -11,7 +11,7 @@ class ImportFormFactory implements FactoryInterface
     {
         $form = new ImportForm(null, $options);
         $config = $services->get('Config');
-        $form->setMappingClasses($config['csv_import_mappings']);
+        $form->setMappingClasses($config['xml_import_mappings']);
         return $form;
     }
 }

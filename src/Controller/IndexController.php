@@ -1,9 +1,9 @@
 <?php
 namespace XMLImport1\Controller;
 
-use CSVImport\Form\ImportForm;
-use CSVImport\Form\MappingForm;
-use CSVImport\CsvFile;
+use XMLImport\Form\ImportForm;
+use XMLImport\Form\MappingForm;
+use XMLImport\xmlFile;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -44,7 +44,7 @@ class IndexController extends AbstractActionController
             $form->setData($post);
             if ($form->isValid()) {
                 $dispatcher = $this->jobDispatcher();
-                $job = $dispatcher->dispatch('CSVImport\Job\Import', $post);
+                $job = $dispatcher->dispatch('XMLImport\Job\Import', $post);
                 //the Omeka2Import record is created in the job, so it doesn't
                 //happen until the job is done
                 $this->messenger()->addSuccess('Importing in Job ID ' . $job->getId()); // @translate
@@ -62,19 +62,19 @@ class IndexController extends AbstractActionController
                 return $this->redirect()->toRoute('admin/xmlimport1');
             }
 
-            $tmpFile = $post['csv']['tmp_name'];
-            $csvFile = new CsvFile($this->config);
-            $csvPath = $csvFile->getTempPath();
-            $csvFile->moveToTemp($tmpFile);
-            $csvFile->loadFromTempPath();
+            $tmpFile = $post['xml']['tmp_name'];
+            $xmlFile = new xmlFile($this->config);
+            $xmlPath = $xmlFile->getTempPath();
+            $xmlFile->moveToTemp($tmpFile);
+            $xmlFile->loadFromTempPath();
 
-            $isUtf8 = $csvFile->isUtf8();
-            if (! $csvFile->isUtf8()) {
+            $isUtf8 = $xmlFile->isUtf8();
+            if (! $xmlFile->isUtf8()) {
                 $this->messenger()->addError('File is not UTF-8 encoded.'); // @translate
                 return $this->redirect()->toRoute('admin/xmlimport1');
             }
 
-            $columns = $csvFile->getHeaders();
+            $columns = $xmlFile->getHeaders();
             $view->setVariable('mediaForms', $this->getMediaForms());
 
             $config = $this->config;
@@ -91,7 +91,7 @@ class IndexController extends AbstractActionController
             $view->setVariable('resourceType', $resourceType);
             $view->setVariable('mappings', $mappingsResource);
             $view->setVariable('columns', $columns);
-            $view->setVariable('csvpath', $csvPath);
+            $view->setVariable('xmlpath', $xmlPath);
         }
         return $view;
     }
@@ -184,11 +184,11 @@ class IndexController extends AbstractActionController
     protected function undoJob($jobId)
     {
         $response = $this->api()->search('xmlimport1_imports', ['job_id' => $jobId]);
-        $csvImport = $response->getContent()[0];
+        $xmlImport = $response->getContent()[0];
         $dispatcher = $this->jobDispatcher();
         $job = $dispatcher->dispatch('XMLImport1\Job\Undo', ['jobId' => $jobId]);
         $response = $this->api()->update('xmlimport1_imports',
-                    $csvImport->id(),
+                    $xmlImport->id(),
                     [
                         'o:undo_job' => ['o:id' => $job->getId() ],
                     ]

@@ -1,5 +1,5 @@
 <?php
-namespace CSVImport\Mapping;
+namespace XMLImport\Mapping;
 
 interface MappingInterface
 {
@@ -21,7 +21,7 @@ interface MappingInterface
     public static function getSidebar($view);
 
     /**
-     * Process a row from the CSV file
+     * Process a row from the xml file
      * @param array $row
      * @return array $entityJson including the added data
      */
