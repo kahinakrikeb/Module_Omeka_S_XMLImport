@@ -1,6 +1,6 @@
 <?php
 
-namespace XMLImport1\Form;
+namespace XMLImport\Form;
 
 use Omeka\Form\Element\ResourceSelect;
 use Zend\Form\Form;

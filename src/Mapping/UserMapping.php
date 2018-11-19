@@ -1,5 +1,5 @@
 <?php
-namespace XMLImport1\Mapping;
+namespace XMLImport\Mapping;
 
 class UserMapping extends AbstractMapping
 {

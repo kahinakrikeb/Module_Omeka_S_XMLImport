@@ -1,7 +1,7 @@
 <?php
-namespace XMLImport1\Service\ViewHelper;
+namespace XMLImport\Service\ViewHelper;
 
-use XMLImport1\View\Helper\MediaSidebar;
+use XMLImport\View\Helper\MediaSidebar;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 
@@ -12,7 +12,7 @@ class MediaSidebarFactory implements FactoryInterface
         $config = $services->get('Config');
         $translator = $services->get('MvcTranslator');
         $ingesterManager = $services->get('Omeka\Media\Ingester\Manager');
-        $mediaAdapters = $config['xml_import1_media_ingester_adapter'];
+        $mediaAdapters = $config['xml_import_media_ingester_adapter'];
         return new MediaSidebar($ingesterManager, $mediaAdapters, $translator);
     }
 }

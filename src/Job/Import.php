@@ -1,5 +1,5 @@
 <?php
-namespace XMLImport1\Job;
+namespace XMLImport\Job;
 
 use Omeka\Job\AbstractJob;
 use XMLImport\XmlFile;
@@ -21,7 +21,7 @@ class Import extends AbstractJob
         $this->api = $this->getServiceLocator()->get('Omeka\ApiManager');
         $config = $this->getServiceLocator()->get('Config');
         $resourceType = $this->getArg('resource_type', 'items');
-        $mappingClasses = $config['xml_import1_mappings'][$resourceType];
+        $mappingClasses = $config['xml_import_mappings'][$resourceType];
         $mappings = [];
         $args = $this->job->getArgs();
         foreach ($mappingClasses as $mappingClass) {
@@ -38,7 +38,7 @@ class Import extends AbstractJob
                             'has_err' => false,
                           ];
 
-        $response = $this->api->create('xmlimport1_imports', $xmlImportJson);
+        $response = $this->api->create('XMLImport_imports', $xmlImportJson);
         $importRecordId = $response->getContent()->id();
         $insertJson = [];
         foreach ($xmlFile->fileObject as $index => $row) {
@@ -73,7 +73,7 @@ class Import extends AbstractJob
                             'added_count' => $this->addedCount,
                             'has_err' => $this->hasErr,
                           ];
-        $response = $this->api->update('xmlimport1_imports', $importRecordId, $xmlImportJson);
+        $response = $this->api->update('XMLImport_imports', $importRecordId, $xmlImportJson);
         $xmlFile->delete();
     }
 
@@ -88,7 +88,7 @@ class Import extends AbstractJob
         foreach ($createContent as $resourceReference) {
             $createImportEntitiesJson[] = $this->buildImportRecordJson($resourceReference);
         }
-        $createImportRecordResponse = $this->api->batchCreate('xmlimport1_entities', $createImportEntitiesJson, [], ['continueOnError' => true]);
+        $createImportRecordResponse = $this->api->batchCreate('XMLImport_entities', $createImportEntitiesJson, [], ['continueOnError' => true]);
     }
 
     protected function buildImportRecordJson($resourceReference)

@@ -1,5 +1,5 @@
 <?php
-namespace XMLImport1\Entity;
+namespace XMLImport\Entity;
 
 use Omeka\Entity\AbstractEntity;
 use Omeka\Entity\Job;
@@ -7,7 +7,7 @@ use Omeka\Entity\Job;
 /**
  * @Entity
  */
-class XMLImport1Entity extends AbstractEntity
+class XMLImportEntity extends AbstractEntity
 {
     /**
      * @Id

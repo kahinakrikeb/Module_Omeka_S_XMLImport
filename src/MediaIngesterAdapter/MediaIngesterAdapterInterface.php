@@ -1,5 +1,5 @@
 <?php
-namespace XMLImport1\MediaIngesterAdapter;
+namespace XMLImport\MediaIngesterAdapter;
 
 interface MediaIngesterAdapterInterface
 {

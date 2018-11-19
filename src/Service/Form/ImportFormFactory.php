@@ -1,7 +1,7 @@
 <?php
-namespace XMLImport1\Service\Form;
+namespace XMLImport\Service\Form;
 
-use XMLImport1\Form\ImportForm;
+use XMLImport\Form\ImportForm;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 

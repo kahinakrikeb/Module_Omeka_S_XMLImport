@@ -1,5 +1,5 @@
 <?php
-namespace XMLImport1\Controller;
+namespace XMLImport\Controller;
 
 use XMLImport\Form\ImportForm;
 use XMLImport\Form\MappingForm;
@@ -33,7 +33,7 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
 
         if (!$request->isPost()) {
-            return $this->redirect()->toRoute('admin/xmlimport1');
+            return $this->redirect()->toRoute('admin/XMLImport');
         }
 
         $files = $request->getFiles()->toArray();
@@ -48,7 +48,7 @@ class IndexController extends AbstractActionController
                 //the Omeka2Import record is created in the job, so it doesn't
                 //happen until the job is done
                 $this->messenger()->addSuccess('Importing in Job ID ' . $job->getId()); // @translate
-                return $this->redirect()->toRoute('admin/xmlimport1/past-imports', ['action' => 'browse'], true);
+                return $this->redirect()->toRoute('admin/XMLImport/past-imports', ['action' => 'browse'], true);
             }
         } else {
             $importForm = $this->getForm(ImportForm::class);
@@ -59,7 +59,7 @@ class IndexController extends AbstractActionController
             $importForm->setData($post);
             if (!$importForm->isValid()) {
                 $this->messenger()->addFormErrors($importForm);
-                return $this->redirect()->toRoute('admin/xmlimport1');
+                return $this->redirect()->toRoute('admin/XMLImport');
             }
 
             $tmpFile = $post['xml']['tmp_name'];
@@ -71,7 +71,7 @@ class IndexController extends AbstractActionController
             $isUtf8 = $xmlFile->isUtf8();
             if (! $xmlFile->isUtf8()) {
                 $this->messenger()->addError('File is not UTF-8 encoded.'); // @translate
-                return $this->redirect()->toRoute('admin/xmlimport1');
+                return $this->redirect()->toRoute('admin/XMLImport');
             }
 
             $columns = $xmlFile->getHeaders();
@@ -114,7 +114,7 @@ class IndexController extends AbstractActionController
             'sort_by' => $this->params()->fromQuery('sort_by', 'id'),
             'sort_order' => $this->params()->fromQuery('sort_order', 'desc'),
         ];
-        $response = $this->api()->search('xmlimport1_imports', $query);
+        $response = $this->api()->search('XMLImport_imports', $query);
         $this->paginator($response->getTotalResults(), $page);
         $view->setVariable('imports', $response->getContent());
         return $view;
@@ -134,15 +134,15 @@ class IndexController extends AbstractActionController
     {
         $defaultOrder = [
             'items' => [
-                '\XMLImport1\Mapping\PropertyMapping',
-                '\XMLImport1\Mapping\ItemMapping',
-                '\XMLImport1\Mapping\MediaMapping',
+                '\XMLImport\Mapping\PropertyMapping',
+                '\XMLImport\Mapping\ItemMapping',
+                '\XMLImport\Mapping\MediaMapping',
             ],
             'users' => [
-                '\XMLImport1\Mapping\UserMapping',
+                '\XMLImport\Mapping\UserMapping',
             ],
         ];
-        $mappings = $this->config['xml_import1_mappings'];
+        $mappings = $this->config['xml_import_mappings'];
         if (isset($defaultOrder[$resourceType])) {
             return array_values(array_unique(array_merge(
                 $defaultOrder[$resourceType], $mappings[$resourceType]
@@ -183,11 +183,11 @@ class IndexController extends AbstractActionController
 
     protected function undoJob($jobId)
     {
-        $response = $this->api()->search('xmlimport1_imports', ['job_id' => $jobId]);
+        $response = $this->api()->search('XMLImport_imports', ['job_id' => $jobId]);
         $xmlImport = $response->getContent()[0];
         $dispatcher = $this->jobDispatcher();
-        $job = $dispatcher->dispatch('XMLImport1\Job\Undo', ['jobId' => $jobId]);
-        $response = $this->api()->update('xmlimport1_imports',
+        $job = $dispatcher->dispatch('XMLImport\Job\Undo', ['jobId' => $jobId]);
+        $response = $this->api()->update('XMLImport_imports',
                     $xmlImport->id(),
                     [
                         'o:undo_job' => ['o:id' => $job->getId() ],

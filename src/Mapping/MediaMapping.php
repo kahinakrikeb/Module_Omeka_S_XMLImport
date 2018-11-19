@@ -1,5 +1,5 @@
 <?php
-namespace XMLImport1\Mapping;
+namespace XMLImport\Mapping;
 
 class MediaMapping extends AbstractMapping
 {
@@ -21,7 +21,7 @@ class MediaMapping extends AbstractMapping
     public function processRow($row)
     {
         $config = $this->getServiceLocator()->get('Config');
-        $mediaAdapters = $config['xml_import1_media_ingester_adapter'];
+        $mediaAdapters = $config['xml_import_media_ingester_adapter'];
         $mediaJson = ['o:media' => []];
         $mediaMap = isset($this->args['media']) ? $this->args['media'] : [];
         $multivalueMap = isset($this->args['column-multivalue']) ? array_keys($this->args['column-multivalue']) : [];

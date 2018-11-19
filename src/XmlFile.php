@@ -1,5 +1,5 @@
 <?php
-namespace XMLImport1;
+namespace XMLImport;
 
 use SplFileObject;
 use Omeka\Service\Exception\ConfigException;

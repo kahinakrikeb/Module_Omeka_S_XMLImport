@@ -2,11 +2,11 @@
 $form->prepare();
 $escapeHtml = $this->plugin('escapeHtml');
 $this->htmlElement('body')->appendAttribute('class', 'no-section-hashes');
-$this->headScript()->appendFile($this->assetUrl('js/xmlimport1.js', 'XMLImport1'));
-$this->headLink()->appendStylesheet($this->assetUrl('css/xmlimport1.css', 'XMLImport1'));
+$this->headScript()->appendFile($this->assetUrl('js/XMLImport.js', 'XMLImport'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/XMLImport.css', 'XMLImport'));
 ?>
 
-<?php echo $this->pageTitle($this->translate('Import Settings'), 1, $this->translate('XML Import1')); ?>
+<?php echo $this->pageTitle($this->translate('Import Settings'), 1, $this->translate('XML Import')); ?>
 
 <?php echo $this->form()->openTag($form); ?>
 <fieldset id='page-actions'>
@@ -14,7 +14,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/xmlimport1.css', 'XMLIm
 </fieldset>
 <nav class="section-nav">
     <ul>
-        <li class="active"><a href="#xml-import1-basics-fieldset"><?php echo $this->translate('Basic Import Settings'); ?></a></li>
+        <li class="active"><a href="#xml-import-basics-fieldset"><?php echo $this->translate('Basic Import Settings'); ?></a></li>
         <li><a href="#mapping-data"><?php echo $this->translate('Map to Omeka S data'); ?></a></li>
     </ul>
 </nav>

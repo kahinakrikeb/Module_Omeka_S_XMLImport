@@ -1,5 +1,5 @@
 <?php
-namespace XMLImport1\Api\Adapter;
+namespace XMLImport\Api\Adapter;
 
 use Doctrine\ORM\QueryBuilder;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
@@ -11,17 +11,17 @@ class ImportAdapter extends AbstractEntityAdapter
 {
     public function getEntityClass()
     {
-        return 'XMLImport1\Entity\XMLImport1Import';
+        return 'XMLImport\Entity\XMLImportImport';
     }
 
     public function getResourceName()
     {
-        return 'xmlimport1_imports';
+        return 'XMLImport_imports';
     }
 
     public function getRepresentationClass()
     {
-        return 'XMLImport1\Api\Representation\ImportRepresentation';
+        return 'XMLImport\Api\Representation\ImportRepresentation';
     }
 
     public function hydrate(Request $request, EntityInterface $entity,

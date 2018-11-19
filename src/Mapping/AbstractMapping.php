@@ -1,5 +1,5 @@
 <?php
-namespace XMLImport1\Mapping;
+namespace XMLImport\Mapping;
 
 abstract class AbstractMapping implements MappingInterface
 {

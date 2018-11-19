@@ -1,5 +1,5 @@
 <?php
-namespace XMLImport1\Form;
+namespace XMLImport\Form;
 
 use Zend\Form\Form;
 
@@ -9,7 +9,7 @@ class ImportForm extends Form
 
     public function init()
     {
-        $this->setAttribute('action', 'xmlimport1/map');
+        $this->setAttribute('action', 'XMLImport/map');
         $this->add([
                 'name' => 'xml',
                 'type' => 'file',

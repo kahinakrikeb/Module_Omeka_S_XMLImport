@@ -1,5 +1,5 @@
 <?php
-namespace XMLImport1\View\Helper;
+namespace XMLImport\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 

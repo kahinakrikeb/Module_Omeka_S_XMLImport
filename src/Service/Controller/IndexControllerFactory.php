@@ -1,7 +1,7 @@
 <?php
-namespace XMLImport1\Service\Controller;
+namespace XMLImport\Service\Controller;
 
-use XMLImport1\Controller\IndexController;
+use XMLImport\Controller\IndexController;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 

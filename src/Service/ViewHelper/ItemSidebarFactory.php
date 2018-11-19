@@ -1,7 +1,7 @@
 <?php
-namespace XMLImport1\Service\ViewHelper;
+namespace XMLImport\Service\ViewHelper;
 
-use XMLImport1\View\Helper\ItemSidebar;
+use XMLImport\View\Helper\ItemSidebar;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 
