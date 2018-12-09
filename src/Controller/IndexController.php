@@ -64,10 +64,13 @@ class IndexController extends AbstractActionController
 
             $tmpFile = $post['xml']['tmp_name'];
             $xmlFile = new xmlFile($this->config);
+            $xml = simplexml_load_file($tmpFile);
+            var_dump($xml);
+            var_dump($tmpFile);
             $xmlPath = $xmlFile->getTempPath();
             $xmlFile->moveToTemp($tmpFile);
+            var_dump($xmlFile);
             $xmlFile->loadFromTempPath();
-
             $isUtf8 = $xmlFile->isUtf8();
             if (! $xmlFile->isUtf8()) {
                 $this->messenger()->addError('File is not UTF-8 encoded.'); // @translate
