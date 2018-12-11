@@ -1,14 +1,27 @@
-# XMLImport
-Ce module permettra aux utilisateurs d'importer des Article dans Omeka's à partir d'un simple fichier XML.
+# XML Import (module pour Omeka S)
+XML Import est un module pour Omeka S il permet aux utilisateurs d'importer des articles à partir d'un simple fichier XML.
 
-# Installation
+# Exigences
+Omeka-S 1.1.1
 
-Pour installer le module :
-1- Copiez le module dans le répertoire modules de Omeka's 
+# Installationread
+Pour installer le module : 
+1-	Copiez le module dans le répertoire modules de Omeka's
+2-	Connectez-vous dans le tableau d'administration de Omeka's et installez le module Omeka_S_XMLImport
+3-	Vous verrez une ligne apparaitre dans le menu sous Modules
+Ou il suffit de regarder la documentation pour Installation de module de  Omeka-s.
 
-2- Connectez-vous dans l'admin de Omeka's et installez le module Omeka_S_XMLImport
+#  Test exemple 
+•	Téléchargez le fichier exemple  
+•	Allez dans le tableau d'administration> Importation XML.
+•	Téléchargez le fichier d'exemple.
+•	Sélectionnez le type d'importation 
+•	Cliquez sur ‘’ Next ’’ en haut à droite.
+•	Cliquez sur Importer avec toutes les valeurs par défaut.
+•	Attendez quelques secondes et vos ensembles d’articles, vos éléments et vos médias sont importés!
 
-3- Vous verrez une ligne apparaitre dans le menu sous Modules 
+# Contact
+•	Kahina KRIKEB (see KahinaKRIKEB on GitHub)
 
-# Utilisation 
-Sélectionnez le fichier XML selon le format (format.XML) puis validez et l'article sera automatiquement ajouté.
+# Copyright
+•	Copyright Kahina KRIKEB, 2018-2019
