@@ -16,7 +16,7 @@ Pour installer le module
 Ou il suffit de regarder la documentation pour [Installation Module](https://omeka.org/s/docs/user-manual/modules/#installing-modules) dans Omeka-s .
 
 #  Test exemple 
-•	Téléchargez [le fichier exemple ] (http://valarnum.univ-paris8.fr/IMG/xml/fran_np_051439.xml)
+•	Téléchargez [le fichier exemple ](http://valarnum.univ-paris8.fr/IMG/xml/fran_np_051439.xml)
 
 •	Allez dans le tableau d'administration> Importation XML.
 
@@ -31,7 +31,7 @@ Ou il suffit de regarder la documentation pour [Installation Module](https://ome
 •	Attendez quelques secondes et vos ensembles d’articles, vos éléments et vos médias sont importés!
 
 # Contact
-•	Kahina KRIKEB (Sur [KahinaKRIKEB] (https://github.com/kahinakrikeb) dans GitHub)
+•	Kahina KRIKEB (Sur [KahinaKRIKEB](https://github.com/kahinakrikeb) dans GitHub)
 
 # Copyright
 •	Copyright Kahina KRIKEB, 2018-2019
