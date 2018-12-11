@@ -13,7 +13,7 @@ Pour installer le module
 
 3-	Vous verrez une ligne apparaitre dans le menu sous Modules
 
-Ou il suffit de regarder la documentation pour Installation de module de  Omeka-s.
+Ou il suffit de regarder la documentation pour Installation [Module](https://omeka.org/s/docs/user-manual/modules/#installing-modules) dans Omeka-s .
 
 #  Test exemple 
 •	Téléchargez le fichier exemple  
